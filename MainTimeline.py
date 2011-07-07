@@ -22,7 +22,7 @@ def s0(param1, param2, param3):
     return _loc_4
 
 def s1(param1, param2):
-    return this.s0(param1, param2.toLowerCase(), param2.toUpperCase())
+    return this.s0(param1, param2.lower(), param2.upper())
 
 def s2(param1):
     _loc_2 = param1
