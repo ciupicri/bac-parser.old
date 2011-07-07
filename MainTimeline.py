@@ -14,13 +14,6 @@
             ExternalInterface.call("function() { window.top.location = \'http://bacalaureat.edu.ro/\'; }");
     return;
 
-def frame1():
-    if (ExternalInterface.available == true)
-    {
-        ExternalInterface.addCallback("s3", this.s3);
-    }
-    return;
-
 def s0(param1, param2, param3):
     var _loc_4:* = param1;
     _loc_4 = param1.split(param2).join("_");
