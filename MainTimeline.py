@@ -16,9 +16,9 @@
 
 def s0(param1, param2, param3):
     _loc_4 = param1
-    _loc_4 = param1.split(param2).join("_")
-    _loc_4 = _loc_4.split(param3).join(param2)
-    _loc_4 = _loc_4.split("_").join(param3)
+    _loc_4 = "_".join(param1.split(param2))
+    _loc_4 = param2.join(_loc_4.split(param3))
+    _loc_4 = param3.join(_loc_4.split("_"))
     return _loc_4
 
 def s1(param1, param2):
