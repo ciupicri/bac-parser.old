@@ -1,6 +1,8 @@
 import itertools
 import lxml.html
 
+from elev import Elev
+
 def get_mainTable(html):
     html = html[html.index('<HTML>'):]
     html = unicode(html, 'utf-8')
@@ -18,7 +20,7 @@ def get_data_from_mainTable(main_table):
                 d.update(get_data_from_tr_with_script(tr))
             else:
                 d.update(get_data_from_tr_without_script(tr))
-        L.append(d)
+        L.append(Elev(**d))
     return L
 
 def get_data_from_tr_with_script(tr):
