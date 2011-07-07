@@ -30,5 +30,5 @@ def s2(param1):
     _loc_4 = 0
     while (_loc_4 < _loc_3.length):
         _loc_2 = this.s1(_loc_2, _loc_3[_loc_4])
-        _loc_4++
+        _loc_4 += 1
     return _loc_2
