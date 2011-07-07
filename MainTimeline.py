@@ -7,11 +7,11 @@
         _loc_1 = this.s0(_loc_1, "5", "S")
         _loc_1 = this.s0(_loc_1, "m", "s")
         _loc_1 = this.s2(_loc_1)
-        _loc_2 = ExternalInterface.call("function() { return window.top.location.href; }")
-        if (_loc_2 != null && _loc_2.indexOf("http://bacalaureat.edu.ro/") == 0):
-            ExternalInterface.call("sdd", Base64.decode(_loc_1))
-        else:
-            ExternalInterface.call("function() { window.top.location = \'http://bacalaureat.edu.ro/\'; }")
+        #_loc_2 = ExternalInterface.call("function() { return window.top.location.href; }")
+        #if (_loc_2 != null && _loc_2.indexOf("http://bacalaureat.edu.ro/") == 0):
+        #    ExternalInterface.call("sdd", Base64.decode(_loc_1))
+        #else:
+        #    ExternalInterface.call("function() { window.top.location = \'http://bacalaureat.edu.ro/\'; }")
     return
 
 def s0(param1, param2, param3):
