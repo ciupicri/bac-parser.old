@@ -15,4 +15,7 @@ f.close()
 ged = ged_regex.search(html).group(1)
 html = MainTimeline.s3(ged).decode('base64')
 main_table = maintable.get_mainTable(html)
-print lxml.etree.tostring(main_table, pretty_print=True)
+data = maintable.get_data_from_mainTable(main_table)
+for i in data:
+    print lxml.etree.tostring(i, pretty_print=True)
+    print '='*72
