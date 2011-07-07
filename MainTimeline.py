@@ -1,6 +1,6 @@
 ﻿def s3():
-    var _loc_2:String = null;
-    var _loc_1:* = ExternalInterface.call("ged");
+    _loc_2 = None;
+    _loc_1 = ged;
     if (_loc_1 != null):
         _loc_1 = this.s0(_loc_1, "0", "O");
         _loc_1 = this.s0(_loc_1, "1", "l");
@@ -15,7 +15,7 @@
     return;
 
 def s0(param1, param2, param3):
-    var _loc_4:* = param1;
+    _loc_4 = param1;
     _loc_4 = param1.split(param2).join("_");
     _loc_4 = _loc_4.split(param3).join(param2);
     _loc_4 = _loc_4.split("_").join(param3);
@@ -25,9 +25,9 @@ def s1(param1, param2):
     return this.s0(param1, param2.toLowerCase(), param2.toUpperCase());
 
 def s2(param1):
-    var _loc_2:* = param1;
-    var _loc_3:* = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-    var _loc_4:int = 0;
+    _loc_2 = param1;
+    _loc_3 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    _loc_4 = 0;
     while (_loc_4 < _loc_3.length):
         _loc_2 = this.s1(_loc_2, _loc_3[_loc_4]);
         _loc_4++;
