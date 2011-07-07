@@ -1,4 +1,4 @@
-﻿def s3():
+﻿def s3(ged):
     _loc_2 = None
     _loc_1 = ged
     if _loc_1 is not None:
@@ -12,7 +12,7 @@
         #    ExternalInterface.call("sdd", Base64.decode(_loc_1))
         #else:
         #    ExternalInterface.call("function() { window.top.location = \'http://bacalaureat.edu.ro/\'; }")
-    return
+    return _loc_1
 
 def s0(param1, param2, param3):
     _loc_4 = param1
