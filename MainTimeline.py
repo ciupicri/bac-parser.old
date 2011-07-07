@@ -28,7 +28,7 @@ def s2(param1):
     _loc_2 = param1
     _loc_3 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     _loc_4 = 0
-    while (_loc_4 < _loc_3.length):
+    while (_loc_4 < len(_loc_3)):
         _loc_2 = s1(_loc_2, _loc_3[_loc_4])
         _loc_4 += 1
     return _loc_2
