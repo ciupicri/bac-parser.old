@@ -9,7 +9,7 @@ def get_mainTable(html):
 
 def get_data_from_mainTable(main_table):
     L = []
-    for tr in main_table.xpath(r'''//tr[@hint]'''):
+    for tr in main_table.xpath(r'''tr[@hint]'''):
         L.append(get_data_from_tr(tr))
     return L
 
