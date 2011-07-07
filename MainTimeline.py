@@ -1,7 +1,7 @@
 ﻿def s3():
     _loc_2 = None
     _loc_1 = ged
-    if (_loc_1 != null):
+    if _loc_1 is not None:
         _loc_1 = s0(_loc_1, "0", "O")
         _loc_1 = s0(_loc_1, "1", "l")
         _loc_1 = s0(_loc_1, "5", "S")
