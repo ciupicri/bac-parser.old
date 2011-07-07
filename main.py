@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 import re
+import sys
 import MainTimeline
 
 ged_regex = re.compile(r'''function\s+ged\(\)\s*{\s*return\s+"([^"]*)"\s*;\s*}''')
 
-f = open('/tmp/page_21.html', 'rt')
+f = open(sys.argv[1], 'rt')
 html = f.read()
 f.close()
 
