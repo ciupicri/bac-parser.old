@@ -10,16 +10,18 @@ def get_mainTable(html):
 def get_data_from_mainTable(main_table):
     L = []
     for tr in main_table.xpath(r'''tr[@hint]'''):
-        if tr.attrib['class'] == 'tr1':
-            L.append(get_data_from_tr1(tr))
-        elif tr.attrib['class'] == 'tr2':
-            L.append(get_data_from_tr2(tr))
+        if tr.find('script') is not None:
+            d = get_data_from_tr_with_script(tr)
+            L.append(d)
         else:
-            raise Exception("cucu bau")
+            d = get_data_from_tr_without_script(tr)
+            L.append(d)
     return L
 
-def get_data_from_tr1(tr):
-    return tr
+def get_data_from_tr_with_script(tr):
+    d = {}
+    return d
 
-def get_data_from_tr2(tr):
-    return tr
+def get_data_from_tr_without_script(tr):
+    d = {}
+    return d

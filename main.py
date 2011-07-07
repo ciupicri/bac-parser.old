@@ -18,5 +18,5 @@ with open('/tmp/main_table.xml', 'wt') as f:
     f.write(lxml.etree.tostring(main_table, pretty_print=True))
 data = maintable.get_data_from_mainTable(main_table)
 for i in data:
-    print lxml.etree.tostring(i, pretty_print=True)
+    print i
     print '='*72
