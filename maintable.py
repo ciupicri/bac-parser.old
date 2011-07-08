@@ -43,8 +43,9 @@ def get_mainTable(html):
 def get_data_from_mainTable(main_table):
     logger = logging.getLogger('maintable.get_data_from_mainTable')
     L = []
-    get_hint = lambda tr: tr.attrib['hint'].strip().upper()
-    for hint, trs in itertools.groupby(main_table.xpath(r'''tr[@hint]'''), get_hint):
+    counter = itertools.count()
+    groupby = lambda x: counter.next() / 2
+    for hint, trs in itertools.groupby(main_table.xpath(r'''tr[@hint]'''), groupby):
         tr = trs.next()
         d = get_extra_data_from_tr(tr)
         d.update(get_data_from_tr(tr, TR_SCRIPT_COLS))
@@ -53,12 +54,6 @@ def get_data_from_mainTable(main_table):
         if tr.find('script') is not None:
             raise Exception('Am gasit script in al doilea tr')
         d.update(get_data_from_tr(tr, TR_WITHOUT_SCRIPT_COLS))
-
-        try:
-            trs.next()
-            raise Exception("Mai mult de 2 tr-uri")
-        except StopIteration:
-            pass
 
         elev = Elev(**d)
         if logger.isEnabledFor(logging.INFO):
