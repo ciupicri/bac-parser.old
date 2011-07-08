@@ -53,7 +53,7 @@ def get_data_from_mainTable(main_table):
 
         tr = trs.next()
         if tr.find('script') is not None:
-            raise Exception('N-am gasit script in al doilea tr')
+            raise Exception('Am gasit script in al doilea tr')
         d.update(get_data_from_tr(tr, TR_WITHOUT_SCRIPT_COLS))
 
         try:
