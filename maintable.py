@@ -52,5 +52,5 @@ def get_data_from_mainTable(main_table):
     return L
 
 def get_data_from_tr(tr, cols):
-    return {c: td.xpath('.//text()')[0].strip()
+    return {c: td.xpath('.//text()')[0].replace('&nbsp', '').strip()
                 for c, td in zip(cols, tr.xpath('td')) if c}
