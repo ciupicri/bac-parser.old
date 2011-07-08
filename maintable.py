@@ -1,9 +1,9 @@
 import itertools
 import logging
 import lxml.html
+import re
 
 from elev import Elev
-
 
 TR_SCRIPT_COLS = (
     None, # Nr. crt.
@@ -31,6 +31,7 @@ TR_WITHOUT_SCRIPT_COLS = (
     'd_alegere_scris_nota', 'd_alegere_nota_scris_contestatie', 'd_alegere_nota_scris_finala'
     )
 
+LUAT_REGEX = re.compile(r'''Luat_?De_?Pe_?BacalaureatEduRo\["([^"]*)"]="([^"]*)";''')
 
 def get_mainTable(html):
     html = html[html.index('<HTML>'):]
@@ -44,11 +45,8 @@ def get_data_from_mainTable(main_table):
     L = []
     get_hint = lambda tr: tr.attrib['hint'].strip().upper()
     for hint, trs in itertools.groupby(main_table.xpath(r'''tr[@hint]'''), get_hint):
-        d = {'nume': hint}
-
         tr = trs.next()
-        if tr.find('script') is None:
-            raise Exception('N-am gasit script in primul tr')
+        d = get_extra_data_from_tr(tr)
         d.update(get_data_from_tr(tr, TR_SCRIPT_COLS))
 
         tr = trs.next()
@@ -71,3 +69,13 @@ def get_data_from_mainTable(main_table):
 def get_data_from_tr(tr, cols):
     return {c: td.xpath('.//text()')[0].replace('&nbsp', '').strip()
                 for c, td in zip(cols, tr.xpath('td')) if c}
+
+def get_extra_data_from_tr(tr):
+    script = tr.xpath('script/text()')[0]
+    items = LUAT_REGEX.findall(script)
+    if len(items) != 3:
+        raise Exception("script paranormal: n-am gasit 3 chei")
+    if not (items[0][0] == items[1][0] == items[2][0]):
+        raise Exception("script paranormal: cheie inegale")
+    return {'nume': items[0][0].replace('<br>', '').strip(),
+            'rezultat_final': items[2][1].strip()}
