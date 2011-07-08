@@ -1,4 +1,5 @@
 import itertools
+import logging
 import lxml.html
 
 from elev import Elev
@@ -39,6 +40,7 @@ def get_mainTable(html):
     return main_table
 
 def get_data_from_mainTable(main_table):
+    logger = logging.getLogger('maintable.get_data_from_mainTable')
     L = []
     get_hint = lambda tr: tr.attrib['hint'].strip().upper()
     for hint, trs in itertools.groupby(main_table.xpath(r'''tr[@hint]'''), get_hint):
@@ -48,7 +50,10 @@ def get_data_from_mainTable(main_table):
                 d.update(get_data_from_tr(tr, TR_SCRIPT_COLS))
             else:
                 d.update(get_data_from_tr(tr, TR_WITHOUT_SCRIPT_COLS))
-        L.append(Elev(**d))
+        elev = Elev(**d)
+        if logger.isEnabledFor(logging.INFO):
+            logger.info("extracted %s" % (elev,))
+        L.append(elev)
     return L
 
 def get_data_from_tr(tr, cols):
