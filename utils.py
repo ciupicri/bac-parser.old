@@ -17,5 +17,3 @@ def get_data_from_file(f):
         logger.debug('main_table:\n' + \
             lxml.etree.tostring(main_table, pretty_print=True))
     return maintable.get_data_from_mainTable(main_table)
-
-
