@@ -45,11 +45,23 @@ def get_data_from_mainTable(main_table):
     get_hint = lambda tr: tr.attrib['hint'].strip().upper()
     for hint, trs in itertools.groupby(main_table.xpath(r'''tr[@hint]'''), get_hint):
         d = {'nume': hint}
-        for tr in trs:
-            if tr.find('script') is not None:
-                d.update(get_data_from_tr(tr, TR_SCRIPT_COLS))
-            else:
-                d.update(get_data_from_tr(tr, TR_WITHOUT_SCRIPT_COLS))
+
+        tr = trs.next()
+        if tr.find('script') is None:
+            raise Exception('N-am gasit script in primul tr')
+        d.update(get_data_from_tr(tr, TR_SCRIPT_COLS))
+
+        tr = trs.next()
+        if tr.find('script') is not None:
+            raise Exception('N-am gasit script in al doilea tr')
+        d.update(get_data_from_tr(tr, TR_WITHOUT_SCRIPT_COLS))
+
+        try:
+            trs.next()
+            raise Exception("Mai mult de 2 tr-uri")
+        except StopIteration:
+            pass
+
         elev = Elev(**d)
         if logger.isEnabledFor(logging.INFO):
             logger.info("extracted %s" % (elev,))
