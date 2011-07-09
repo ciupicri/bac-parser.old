@@ -34,14 +34,18 @@ def parse_args():
     args = parser.parse_args()
     return args
 
-def main():
-    args = parse_args()
-    for filename in args.filenames:
+def get_data(filenames):
+    for filename in filenames:
         logging.info("Extracting from %s" % (filename,))
         with open_compressed_file(filename) as f:
             for i in get_data_from_file(f):
-                args.output.write(repr(i))
-                args.output.write('\n#######################################################################\n')
+                yield i
+
+def main():
+    args = parse_args()
+    for i in get_data(args.filenames):
+        args.output.write(repr(i))
+        args.output.write('\n#######################################################################\n')
 
 if __name__ == '__main__':
     logging.config.fileConfig('logging.ini')
