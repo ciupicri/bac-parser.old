@@ -27,6 +27,28 @@ def open_compressed_file(filename):
     dir(f) # workaround for https://bugzilla.redhat.com/show_bug.cgi?id=720111
     return f
 
+def get_data(filenames):
+    for filename in filenames:
+        logging.info("Extracting from %s" % (filename,))
+        with open_compressed_file(filename) as f:
+            for i in get_data_from_file(f):
+                yield i
+
+
+def output_python(f, record):
+    f.write(repr(record))
+    f.write('\n#######################################################################\n')
+
+def output_pickle(f, record):
+    cPickle.dump(record, f)
+
+
+def db_create_table(conn, tbl_name):
+    f = ('%s %s' % (i, 'numeric(4,2)' if '_scris' in i else 'varchar(100)')
+            for i in Elev._fields)
+    conn.execute('CREATE TABLE %s (%s)' % (tbl_name, ",".join(f)))
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
             description=u'Extrage informații despre elevi din fișiere HTML')
@@ -41,25 +63,6 @@ def parse_args():
                         help=u'''Formatul de ieșire. Formate suportate: %(choices)s. Format implicit: %(default)s.''')
     args = parser.parse_args()
     return args
-
-def get_data(filenames):
-    for filename in filenames:
-        logging.info("Extracting from %s" % (filename,))
-        with open_compressed_file(filename) as f:
-            for i in get_data_from_file(f):
-                yield i
-
-def output_python(f, record):
-    f.write(repr(record))
-    f.write('\n#######################################################################\n')
-
-def output_pickle(f, record):
-    cPickle.dump(record, f)
-
-def db_create_table(conn, tbl_name):
-    f = ('%s %s' % (i, 'numeric(4,2)' if '_scris' in i else 'varchar(100)')
-            for i in Elev._fields)
-    conn.execute('CREATE TABLE %s (%s)' % (tbl_name, ",".join(f)))
 
 def main():
     args = parse_args()
