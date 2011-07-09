@@ -73,8 +73,9 @@ def main():
         elif args.format == 'pickle':
             fout = open(args.output, 'wb') if isinstance(args.output,basestring) else args.output
             output = functools.partial(output_pickle, fout)
-        for i in get_data(args.filenames):
-            output(i)
+        with fout:
+            for i in get_data(args.filenames):
+                output(i)
     elif args.format == 'sqlite':
         con = sqlite3.connect(args.output)
         db_create_table(con, 'rezultate')
