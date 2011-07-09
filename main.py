@@ -61,6 +61,9 @@ def parse_args():
                         type=str, choices=('python', 'pickle', 'sqlite'),
                         default='python',
                         help=u'''Formatul de ieșire. Formate suportate: %(choices)s. Format implicit: %(default)s.''')
+    parser.add_argument('--dbtable', metavar='DBTABLE',
+                        type=str, default='rezultate',
+                        help=u'Numele tabelului din baza de date. Nume implicit: %(default)s.')
     args = parser.parse_args()
     return args
 
@@ -78,9 +81,9 @@ def main():
                 output(i)
     elif args.format == 'sqlite':
         con = sqlite3.connect(args.output)
-        db_create_table(con, 'rezultate')
-        insert_query = 'INSERT INTO rezultate VALUES(%s)' % \
-            (','.join('?'*len(Elev._fields)),)
+        db_create_table(con, args.dbtable)
+        insert_query = 'INSERT INTO %s VALUES(%s)' % \
+            (args.dbtable, ','.join('?'*len(Elev._fields)))
         with con:
             con.executemany(insert_query, get_data(args.filenames))
 
