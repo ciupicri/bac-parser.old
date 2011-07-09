@@ -31,7 +31,7 @@ TR_WITHOUT_SCRIPT_COLS = (
     'd_alegere_scris_nota', 'd_alegere_nota_scris_contestatie', 'd_alegere_nota_scris_finala'
     )
 
-LUAT_REGEX = re.compile(r'''Luat_?De_?Pe_?BacalaureatEduRo\["([^"]*)"]="([^"]*)";''')
+js_luat_regex = re.compile(r'''Luat_?De_?Pe_?BacalaureatEduRo\["([^"]*)"]="([^"]*)";''')
 
 def grouper(n, iterable, fillvalue=None):
     "grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"
@@ -66,7 +66,7 @@ def get_data_from_tr(tr, cols):
 
 def get_extra_data_from_tr(tr):
     script = tr.xpath('script/text()')[0]
-    items = LUAT_REGEX.findall(script)
+    items = js_luat_regex.findall(script)
     if len(items) != 3:
         raise Exception("script paranormal: n-am gasit 3 chei")
     if not (items[0][0] == items[1][0] == items[2][0]):
