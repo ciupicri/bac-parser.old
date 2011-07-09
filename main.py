@@ -32,11 +32,11 @@ def parse_args():
                         help=u'O pagină de pe site-ul edu.ro. Folosiți - pentru stdin.')
     parser.add_argument('-o', '--output', metavar='OUTPUT',
                         type=argparse.FileType('w'), default=sys.stdout,
-                        help=u'Fișierul de ieșire.')
+                        help=u'Fișierul de ieșire. Implicit e stdout.')
     parser.add_argument('--format', metavar='FORMAT',
                         type=str, choices=('python', 'pickle'),
                         default='python',
-                        help=u'Fișierul de ieșire.')
+                        help=u'''Formatul de ieșire. Formate suportate: %(choices)s. Format implicit: %(default)s.''')
     args = parser.parse_args()
     return args
 
