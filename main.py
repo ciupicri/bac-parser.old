@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# vim: set fileencoding=utf-8
+import argparse
 import logging
 import logging.config
 import os.path
@@ -19,8 +21,17 @@ def open_compressed_file(filename):
     dir(f) # workaround for https://bugzilla.redhat.com/show_bug.cgi?id=720111
     return f
 
+def parse_args():
+    parser = argparse.ArgumentParser(
+            description=u'Extrage informații despre elevi din fișiere HTML')
+    parser.add_argument('filenames', metavar='FILE', type=str, nargs='+',
+                        help=u'O pagină de pe site-ul edu.ro')
+    args = parser.parse_args()
+    return args
+
 def main():
-    for filename in sys.argv[1:]:
+    args = parse_args()
+    for filename in args.filenames:
         logging.info("Extracting from %s" % (filename,))
         with open_compressed_file(filename) as f:
             for i in get_data_from_file(f):
