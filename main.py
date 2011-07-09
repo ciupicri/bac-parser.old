@@ -28,6 +28,9 @@ def parse_args():
             description=u'Extrage informații despre elevi din fișiere HTML')
     parser.add_argument('filenames', metavar='FILE', type=str, nargs='+',
                         help=u'O pagină de pe site-ul edu.ro. Folosiți - pentru stdin.')
+    parser.add_argument('-o', '--output', metavar='OUTPUT',
+                        type=argparse.FileType('w'), default=sys.stdout,
+                        help=u'Fișierul de ieșire.')
     args = parser.parse_args()
     return args
 
@@ -37,8 +40,8 @@ def main():
         logging.info("Extracting from %s" % (filename,))
         with open_compressed_file(filename) as f:
             for i in get_data_from_file(f):
-                print i
-                print '#'*72
+                args.output.write(repr(i))
+                args.output.write('\n#######################################################################\n')
 
 if __name__ == '__main__':
     logging.config.fileConfig('logging.ini')
