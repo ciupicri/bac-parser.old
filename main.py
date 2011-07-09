@@ -10,7 +10,7 @@ def main():
         with open(filename, 'rt') as f:
             for i in get_data_from_file(f):
                 print i
-                print '='*72
+                print '#'*72
 
 if __name__ == '__main__':
     logging.config.fileConfig('logging.ini')
