@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # vim: set fileencoding=utf-8
 import argparse
+import cPickle
+import functools
 import logging
 import logging.config
 import os.path
@@ -31,6 +33,10 @@ def parse_args():
     parser.add_argument('-o', '--output', metavar='OUTPUT',
                         type=argparse.FileType('w'), default=sys.stdout,
                         help=u'Fișierul de ieșire.')
+    parser.add_argument('--format', metavar='FORMAT',
+                        type=str, choices=('python', 'pickle'),
+                        default='python',
+                        help=u'Fișierul de ieșire.')
     args = parser.parse_args()
     return args
 
@@ -41,11 +47,21 @@ def get_data(filenames):
             for i in get_data_from_file(f):
                 yield i
 
+def output_python(f, record):
+    f.write(repr(record))
+    f.write('\n#######################################################################\n')
+
+def output_pickle(f, record):
+    cPickle.dump(record, f)
+
 def main():
     args = parse_args()
+    if args.format == 'python':
+        output = functools.partial(output_python, args.output)
+    elif args.format == 'pickle':
+        output = functools.partial(output_pickle, args.output)
     for i in get_data(args.filenames):
-        args.output.write(repr(i))
-        args.output.write('\n#######################################################################\n')
+        output(i)
 
 if __name__ == '__main__':
     logging.config.fileConfig('logging.ini')
