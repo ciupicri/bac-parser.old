@@ -65,6 +65,8 @@ def get_data_from_tr(tr, cols):
                 for c, td in zip(cols, tr.xpath('td')) if c}
 
 def get_extra_data_from_tr(tr):
+    global js_luat_regex
+
     script = tr.xpath('script/text()')[0]
     items = js_luat_regex.findall(script)
     if len(items) != 3:

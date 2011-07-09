@@ -8,6 +8,8 @@ import maintable
 js_ged_regex = re.compile(r'''function\s+ged\(\)\s*{\s*return\s+"([^"]*)"\s*;\s*}''')
 
 def get_data_from_file(f):
+    global js_ged_regex
+
     logger = logging.getLogger('get_data_from_file')
     html = f.read()
     ged = js_ged_regex.search(html).group(1)

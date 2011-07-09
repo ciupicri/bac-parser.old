@@ -20,6 +20,8 @@ COMPRESSED_FILE_CLASSES = {'.gz': GzipFile,
                            '.xz': LZMAFile}
 
 def open_compressed_file(filename):
+    global COMPRESSED_FILE_CLASSES
+
     if filename == '-':
         return sys.stdin
     ext = os.path.splitext(filename)[1]
