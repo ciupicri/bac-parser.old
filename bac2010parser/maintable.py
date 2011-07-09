@@ -47,7 +47,6 @@ def get_mainTable(html):
 
 def get_data_from_mainTable(main_table):
     logger = logging.getLogger('maintable.get_data_from_mainTable')
-    L = []
     for trs in grouper(2, main_table.xpath(r'''tr[@hint]''')):
         d = get_extra_data_from_tr(trs[0])
         d.update(get_data_from_tr(trs[0], TR_SCRIPT_COLS))
@@ -59,8 +58,7 @@ def get_data_from_mainTable(main_table):
         elev = Elev(**d)
         if logger.isEnabledFor(logging.INFO):
             logger.info("extracted %s" % (elev,))
-        L.append(elev)
-    return L
+        yield elev
 
 def get_data_from_tr(tr, cols):
     return {c: td.xpath('.//text()')[0].replace('&nbsp', '').strip()
