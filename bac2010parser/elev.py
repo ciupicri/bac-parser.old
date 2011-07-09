@@ -11,7 +11,7 @@ Elev = collections.namedtuple('Elev',
          'd_limba_materna_nume', 'd_limba_materna_competente', 'd_limba_materna_scris_nota', 'd_limba_materna_scris_nota_contestatie', 'd_limba_materna_scris_nota_finala',
          'd_limba_moderna_nume', 'd_limba_moderna_nota',
          'd_profil_scris_nume', 'd_profil_scris_nota', 'd_profil_scris_nota_contestatie', 'd_profil_scris_nota_finala',
-         'd_alegere_scris_nume', 'd_alegere_scris_nota', 'd_alegere_nota_scris_contestatie', 'd_alegere_nota_scris_finala',
+         'd_alegere_scris_nume', 'd_alegere_scris_nota', 'd_alegere_scris_nota_contestatie', 'd_alegere_scris_nota_finala',
          'd_competente_digitale',
          'rezultat_final',
         )

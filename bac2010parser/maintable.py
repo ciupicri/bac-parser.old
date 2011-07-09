@@ -28,7 +28,7 @@ TR_SCRIPT_COLS = (
 TR_WITHOUT_SCRIPT_COLS = (
     'd_limba_materna_competente', 'd_limba_materna_scris_nota', 'd_limba_materna_scris_nota_contestatie', 'd_limba_materna_scris_nota_finala',
     'd_profil_scris_nota', 'd_profil_scris_nota_contestatie', 'd_profil_scris_nota_finala',
-    'd_alegere_scris_nota', 'd_alegere_nota_scris_contestatie', 'd_alegere_nota_scris_finala'
+    'd_alegere_scris_nota', 'd_alegere_scris_nota_contestatie', 'd_alegere_scris_nota_finala'
     )
 
 js_luat_regex = re.compile(r'''Luat_?De_?Pe_?BacalaureatEduRo\["([^"]*)"]="([^"]*)";''')
