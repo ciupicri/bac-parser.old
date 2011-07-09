@@ -16,6 +16,8 @@ COMPRESSED_FILE_CLASSES = {'.gz': GzipFile,
                            '.xz': LZMAFile}
 
 def open_compressed_file(filename):
+    if filename == '-':
+        return sys.stdin
     ext = os.path.splitext(filename)[1]
     f = COMPRESSED_FILE_CLASSES.get(ext, file)(filename)
     dir(f) # workaround for https://bugzilla.redhat.com/show_bug.cgi?id=720111
@@ -25,7 +27,7 @@ def parse_args():
     parser = argparse.ArgumentParser(
             description=u'Extrage informații despre elevi din fișiere HTML')
     parser.add_argument('filenames', metavar='FILE', type=str, nargs='+',
-                        help=u'O pagină de pe site-ul edu.ro')
+                        help=u'O pagină de pe site-ul edu.ro. Folosiți - pentru stdin.')
     args = parser.parse_args()
     return args
 
