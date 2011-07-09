@@ -33,6 +33,11 @@ TR_WITHOUT_SCRIPT_COLS = (
 
 LUAT_REGEX = re.compile(r'''Luat_?De_?Pe_?BacalaureatEduRo\["([^"]*)"]="([^"]*)";''')
 
+def grouper(n, iterable, fillvalue=None):
+    "grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"
+    args = [iter(iterable)] * n
+    return itertools.izip_longest(fillvalue=fillvalue, *args)
+
 def get_mainTable(html):
     html = html[html.index('<HTML>'):]
     html = unicode(html, 'utf-8')
@@ -43,17 +48,13 @@ def get_mainTable(html):
 def get_data_from_mainTable(main_table):
     logger = logging.getLogger('maintable.get_data_from_mainTable')
     L = []
-    counter = itertools.count()
-    groupby = lambda x: counter.next() / 2
-    for hint, trs in itertools.groupby(main_table.xpath(r'''tr[@hint]'''), groupby):
-        tr = trs.next()
-        d = get_extra_data_from_tr(tr)
-        d.update(get_data_from_tr(tr, TR_SCRIPT_COLS))
+    for trs in grouper(2, main_table.xpath(r'''tr[@hint]''')):
+        d = get_extra_data_from_tr(trs[0])
+        d.update(get_data_from_tr(trs[0], TR_SCRIPT_COLS))
 
-        tr = trs.next()
-        if tr.find('script') is not None:
+        if trs[1].find('script') is not None:
             raise Exception('Am gasit script in al doilea tr')
-        d.update(get_data_from_tr(tr, TR_WITHOUT_SCRIPT_COLS))
+        d.update(get_data_from_tr(trs[1], TR_WITHOUT_SCRIPT_COLS))
 
         elev = Elev(**d)
         if logger.isEnabledFor(logging.INFO):
