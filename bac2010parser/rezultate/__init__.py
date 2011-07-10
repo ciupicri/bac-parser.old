@@ -3,6 +3,7 @@ import re
 
 from .elev import Elev
 from ..utils import grouper
+from ..maintable import get_data_from_tr
 
 TR_SCRIPT_COLS = (
     None, # Nr. crt.
@@ -46,10 +47,6 @@ def get_elev_from_mainTable(main_table):
         if logger.isEnabledFor(logging.INFO):
             logger.info("extracted %s" % (elev,))
         yield elev
-
-def get_data_from_tr(tr, cols):
-    return {c: td.xpath('.//text()')[0].replace('&nbsp', '').strip()
-                for c, td in zip(cols, tr.xpath('td')) if c}
 
 def get_extra_data_from_tr(tr):
     global js_luat_regex
