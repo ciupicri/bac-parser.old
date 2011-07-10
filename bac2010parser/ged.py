@@ -1,4 +1,5 @@
 import re
+import sys
 
 import MainTimeline
 
@@ -10,3 +11,12 @@ def get_inner_html(line):
     if not ged:
         return None
     return MainTimeline.s3(ged.group(1)).decode('base64')
+
+def main():
+    for line in sys.stdin:
+        html = get_inner_html(line)
+        if html:
+            print html
+
+if __name__ == '__main__':
+    main()
