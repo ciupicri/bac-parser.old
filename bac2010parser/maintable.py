@@ -1,4 +1,3 @@
-import logging
 import lxml.etree
 import lxml.html
 import sys
