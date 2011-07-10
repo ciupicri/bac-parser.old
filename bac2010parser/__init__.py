@@ -3,9 +3,8 @@ import lxml.etree
 
 from . import ged
 from . import maintable
-from .rezultate import get_elev_from_mainTable
 
-def get_data_from_file(f):
+def get_data_from_file(f, get_data_from_mainTable):
     logger = logging.getLogger('bac2010parser.get_data_from_file')
     for line in f:
         html = ged.get_inner_html(line)
@@ -15,5 +14,5 @@ def get_data_from_file(f):
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug('main_table:\n' + \
                 lxml.etree.tostring(main_table, pretty_print=True))
-        for i in get_elev_from_mainTable(main_table):
+        for i in get_data_from_mainTable(main_table):
             yield i
