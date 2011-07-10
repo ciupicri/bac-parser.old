@@ -2,7 +2,7 @@ import itertools
 import logging
 import re
 
-from elev import Elev
+from .elev import Elev
 
 TR_SCRIPT_COLS = (
     None, # Nr. crt.

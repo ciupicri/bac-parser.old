@@ -1,9 +1,9 @@
 import logging
 import lxml.etree
 
-import ged
-import maintable
-from rezultate import get_elev_from_mainTable
+from . import ged
+from . import maintable
+from .rezultate import get_elev_from_mainTable
 
 def get_data_from_file(f):
     logger = logging.getLogger('get_data_from_file')
