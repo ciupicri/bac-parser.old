@@ -6,7 +6,7 @@ from . import maintable
 from .rezultate import get_elev_from_mainTable
 
 def get_data_from_file(f):
-    logger = logging.getLogger('get_data_from_file')
+    logger = logging.getLogger('bac2010parser.get_data_from_file')
     for line in f:
         html = ged.get_inner_html(line)
         if not html:
