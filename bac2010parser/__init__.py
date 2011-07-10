@@ -1,21 +1,15 @@
 import logging
 import lxml.etree
-import re
 
-import MainTimeline
+import ged
 import maintable
 
-js_ged_regex = re.compile(r'''function\s+ged\(\)\s*{\s*return\s+"([^"]*)"\s*;\s*}''')
-
 def get_data_from_file(f):
-    global js_ged_regex
-
     logger = logging.getLogger('get_data_from_file')
     for line in f:
-        ged = js_ged_regex.search(line)
-        if not ged:
+        html = ged.get_inner_html(line)
+        if not html:
             continue
-        html = MainTimeline.s3(ged.group(1)).decode('base64')
         main_table = maintable.get_mainTable(html)
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug('main_table:\n' + \
