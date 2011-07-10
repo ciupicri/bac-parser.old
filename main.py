@@ -46,8 +46,7 @@ def output_pickle(f, record):
 
 
 def db_create_table(conn, tbl_name):
-    f = ('%s %s' % (i, 'numeric(4,2)' if '_scris' in i else 'varchar(100)')
-            for i in Elev._fields)
+    f = ('%s varchar(100)' % (i,) for i in Elev._fields)
     conn.execute('CREATE TABLE %s (%s)' % (tbl_name, ",".join(f)))
 
 
