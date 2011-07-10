@@ -1,8 +1,8 @@
-import itertools
 import logging
 import re
 
 from .elev import Elev
+from ..utils import grouper
 
 TR_SCRIPT_COLS = (
     None, # Nr. crt.
@@ -31,13 +31,6 @@ TR_WITHOUT_SCRIPT_COLS = (
     )
 
 js_luat_regex = re.compile(r'''Luat_?De_?Pe_?BacalaureatEduRo\["([^"]*)"]="([^"]*)";''')
-
-
-def grouper(n, iterable, fillvalue=None):
-    "grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"
-    args = [iter(iterable)] * n
-    return itertools.izip_longest(fillvalue=fillvalue, *args)
-
 
 def get_elev_from_mainTable(main_table):
     logger = logging.getLogger('maintable.get_data_from_mainTable')
