@@ -15,6 +15,7 @@ from lzma import LZMAFile
 from bac2010parser.rezultate.elev import Elev
 from bac2010parser import get_data_from_file
 from bac2010parser.rezultate import get_elev_from_mainTable
+from bac2010parser.centre import get_centru_from_mainTable
 
 COMPRESSED_FILE_CLASSES = {'.gz': GzipFile,
                            '.bz2': BZ2File,
