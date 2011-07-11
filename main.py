@@ -43,7 +43,7 @@ def output_python(f, record):
     f.write('\n#######################################################################\n')
 
 def output_pickle(f, record):
-    cPickle.dump(record, f)
+    cPickle.dump(record, f, -1)
 
 
 def db_create_table(conn, tbl_name):
