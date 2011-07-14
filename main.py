@@ -12,9 +12,9 @@ from gzip import GzipFile
 from bz2 import BZ2File
 from lzma import LZMAFile
 
-from bac2010parser.rezultate.elev import Elev
-from bac2010parser import get_data_from_file
-from bac2010parser.rezultate import get_elev_from_mainTable
+from bacparser.rezultate.elev import Elev
+from bacparser import get_data_from_file
+from bacparser.rezultate import get_elev_from_mainTable
 
 COMPRESSED_FILE_CLASSES = {'.gz': GzipFile,
                            '.bz2': BZ2File,

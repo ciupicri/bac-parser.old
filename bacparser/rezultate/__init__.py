@@ -34,7 +34,7 @@ TR_WITHOUT_SCRIPT_COLS = (
 js_luat_regex = re.compile(r'''Luat_?De_?Pe_?BacalaureatEduRo\["([^"]*)"]="([^"]*)";''')
 
 def get_elev_from_mainTable(main_table):
-    logger = logging.getLogger('bac2010parser.rezultate.get_elev_from_mainTable')
+    logger = logging.getLogger('bacparser.rezultate.get_elev_from_mainTable')
     for trs in grouper(2, main_table.xpath(r'''tr[@hint]''')):
         d = get_extra_data_from_tr(trs[0])
         d.update(get_data_from_tr(trs[0], TR_SCRIPT_COLS))

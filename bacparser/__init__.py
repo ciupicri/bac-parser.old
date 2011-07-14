@@ -5,7 +5,7 @@ from . import ged
 from . import maintable
 
 def get_data_from_file(f, get_data_from_mainTable):
-    logger = logging.getLogger('bac2010parser.get_data_from_file')
+    logger = logging.getLogger('bacparser.get_data_from_file')
     for line in f:
         html = ged.get_inner_html(line)
         if not html:
