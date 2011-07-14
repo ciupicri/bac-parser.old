@@ -3,7 +3,7 @@ This is a scraping script for extracting the results of the
 years 2010 and 2011. It can read from standard input or files. The files can
 be compressed with gzip, bzip2 or xz.
 
-It was used to get the data needed for the following blog posts:
+I wrote it to help a friend who wanted to analyze the results the of the exam. You can read her analysis at the following addresses:
 
  - http://www.dianacoman.com/blog/2011/07/08/avem-date-de-la-bac-ce-facem-cu-ele/
  - http://www.dianacoman.com/blog/2011/07/09/topul-hotiei-dovedite-la-bacalaureat-2011/
