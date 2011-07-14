@@ -68,7 +68,7 @@ to tell me about it or give me some credit. Thank you!
 Credits
 =======
 
-This wouldn't have been possible without the [Sothink SWF Decompiler][1]. Shame
+This wouldn't have been possible without the [Sothink SWF Decompiler][2]. Shame
 on Siveco for using Flash even if it wasn't really needed.
 
-[1]: http://www.sothink.com/product/flashdecompiler/
+[2]: http://www.sothink.com/product/flashdecompiler/
