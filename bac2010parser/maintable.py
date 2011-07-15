@@ -10,7 +10,7 @@ def get_mainTable(html):
     return main_table
 
 def get_data_from_tr(tr, cols):
-    return {c: td.xpath('.//text()')[0].replace('&nbsp', '').strip()
+    return {c: ''.join(td.xpath('.//text()')).replace('&nbsp', '').strip()
                 for c, td in zip(cols, tr.xpath('td')) if c}
 
 def main(f):
