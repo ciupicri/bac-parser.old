@@ -1,5 +1,9 @@
 import logging
 
+import sys
+from IPython.Shell import IPShellEmbed
+ipshell = IPShellEmbed()
+
 from .elev import Elev
 from ..utils import grouper
 from ..maintable import get_data_from_tr
@@ -36,6 +40,8 @@ TR2_COLS = (
 def get_elev_from_mainTable(main_table):
     logger = logging.getLogger('bac2010parser.rezultate.get_elev_from_mainTable')
     for trs in grouper(2, main_table.xpath(r'''tr[@hint]''')):
+        ipshell() # this call anywhere in your program will start IPython
+        sys.exit(1)
         d = get_data_from_tr(trs[0], TR1_COLS)
         d.update(get_data_from_tr(trs[1], TR2_COLS))
 
